@@ -17,4 +17,6 @@ void supprimer_combinaison (p_comb* c);
 
 void afficher_combinaison(p_comb c);
 
+int comparer(p_comb,p_comb);
+
 #endif

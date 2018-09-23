@@ -14,6 +14,19 @@ void _afficher(void* _val){
 	afficher_combinaison((p_comb)_val);
 }
 
+int _compare_existe(void* a, void* b){
+	char* ca = (char*)a;
+	p_comb cb = (p_comb)b;
+	int n = 0;
+	char* chaine_comb = cb->lettre;
+	for(unsigned int i=0; i<strlen(chaine_comb);i++)
+		for(unsigned int j=0; j<strlen(ca);j++)
+			if(chaine_comb[i]==ca[j])
+				n++;
+
+	return n;
+
+}
 
 int main (void) {
 	char* l="uzay";
@@ -30,6 +43,11 @@ int main (void) {
 
 
 	afficher_arbre(	a,&_afficher);
+
+
+	printf("Test de existe avec \"u\"%d\n",existe_arbre("au",a,&_compare_existe));
+
+
 	detruire_tout(&a,&_detruire);
 	afficher_arbre(a,&_afficher);
 	

@@ -15,4 +15,12 @@ void afficher_noeud (p_noeud n, void(* _afficher)(void*));
 
 void afficher_tout(p_noeud,void(*_afficher)(void*));
 
+void* get_valeur(p_noeud);
+
+int existe_noeud(void* elt, p_noeud n,int(*_compare)(void*,void*));
+
+int nb_branches_noeud(p_noeud);
+
+int nb_feuilles_noeud(p_noeud);
+
 #endif

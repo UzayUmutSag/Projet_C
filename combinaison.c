@@ -22,3 +22,10 @@ void afficher_combinaison(p_comb c){
 	else
 		printf("Vide\n");
 }
+
+int comparer(p_comb a, p_comb b){
+	if(a->occ == b->occ)
+		return strcmp(a->lettre,b->lettre);
+	else
+		return a->occ >b->occ ? 1: -1;
+}

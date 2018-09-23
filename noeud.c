@@ -47,3 +47,43 @@ void afficher_tout(p_noeud n,void(*_afficher)(void*)){
 		afficher_tout(n->f_gauche,_afficher);
 	}
 }
+
+void* get_valeur(p_noeud n){
+	return n->val;
+}
+
+
+int existe_noeud(void* elt, p_noeud n,int(*_compare)(void*,void*)){
+	if(n!=NULL){
+		int i = _compare(elt,get_valeur(n));
+		if(i==0){
+				i= existe_noeud(elt,n->f_droite,_compare) + existe_noeud(elt,n->f_gauche,_compare);	
+		}
+		return i;
+	}
+	return 0;
+}
+
+int nb_branches_noeud(p_noeud n){
+	if(n==NULL)
+		return 0;
+	else{
+		int i = 0;
+		if(n->f_droite != NULL)
+			i=1+nb_branches_noeud(n->f_droite);
+		if(n->f_gauche != NULL)
+			i=1+nb_branches_noeud(n->f_gauche);
+		return i;
+	} 
+		
+
+}
+
+int nb_feuilles_noeud(p_noeud n){
+	if(n==NULL) return 0;
+	if(n->f_droite == NULL && n->f_gauche == NULL)
+		return 1;
+	else
+		return nb_feuilles_noeud(n->f_droite)+nb_feuilles_noeud(n->f_gauche);
+}
+
