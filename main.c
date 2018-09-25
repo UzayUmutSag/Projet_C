@@ -8,6 +8,7 @@ void _copier(void* _val, void** ptr){
 
 void _detruire(void** ptr){
 	supprimer_combinaison((p_comb*)(ptr));
+	*ptr=NULL;
 }
 
 void _afficher(void* _val){
@@ -42,10 +43,12 @@ int main (void) {
 
 
 	printf("%s\n", res);*/
+	char * l1 = "uzay";
+	char *l2 = " umut";
+	p_comb a = creer_combinaison(l1,1);
 
-	p_comb a = creer_combinaison("uzay",1);
+	p_comb b = creer_combinaison(l2,2);
 
-	p_comb b = creer_combinaison(" umut",2);
 
 	afficher_combinaison(a);
 
@@ -60,16 +63,30 @@ int main (void) {
 	afficher_combinaison(res);
 
 	supprimer_combinaison(&b);
-	supprimer_combinaison(&a);
+	//supprimer_combinaison(&a);
 	supprimer_combinaison(&res);
 
-
-/*
 
 	printf("\n&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\n\n");
 
 	p_arbre a1 = creer_arbre(a,&_copier);
+	supprimer_combinaison(&a);
+	afficher_arbre(a1,_afficher);
+
+
+	printf("test fusion : \n");
+
+	p_arbre fusion = fusion_arbre(a1,a1,&_fusion,&_copier,&_comparer);
+	afficher_arbre(fusion,&_afficher);
+	
+	detruire_tout(&fusion,&_detruire);
+	
+
+
+/*
 	p_arbre a2 = creer_arbre(b,&_copier);
+
+	supprimer_combinaison(&b);
 
 
 
@@ -78,7 +95,7 @@ int main (void) {
 	
 	
 	
-	afficher_arbre(a1,_afficher);
+
 	
 
 	printf("arbre fusioné\n");
@@ -88,7 +105,7 @@ int main (void) {
 
 	
 	detruire_tout(&a2,&_detruire);
-	detruire_tout(&a1,&_detruire);
+	
 	detruire_tout(&res_arbre_1,&_detruire);
 	
 
