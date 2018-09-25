@@ -43,8 +43,8 @@ void afficher_noeud (p_noeud n, void(* _afficher)(void*)){
 void afficher_tout(p_noeud n,void(*_afficher)(void*)){
 	if(n!=NULL){
 		_afficher(n->val);
-		afficher_tout(n->f_droite,_afficher);
 		afficher_tout(n->f_gauche,_afficher);
+		afficher_tout(n->f_droite,_afficher);
 	}
 }
 
