@@ -15,4 +15,15 @@ void afficher_noeud (p_noeud n, void(* _afficher)(void*));
 
 void afficher_tout(p_noeud,void(*_afficher)(void*));
 
+void* get_valeur(p_noeud n);
+
+p_noeud get_fils_droite (p_noeud n);
+
+p_noeud get_fils_gauche (p_noeud n);
+
+void ajouter_fils_droite(p_noeud *racine,p_noeud *n);
+
+void ajouter_fils_gauche(p_noeud *racine,p_noeud *n);
+
+
 #endif

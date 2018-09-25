@@ -47,3 +47,23 @@ void afficher_tout(p_noeud n,void(*_afficher)(void*)){
 		afficher_tout(n->f_gauche,_afficher);
 	}
 }
+
+void* get_valeur(p_noeud n){
+	return n->val;
+}
+
+p_noeud get_fils_droite (p_noeud n){
+	return n->f_droite;
+}
+
+p_noeud get_fils_gauche (p_noeud n){
+	return n->f_gauche;
+}
+
+void ajouter_fils_droite(p_noeud *racine,p_noeud *n){
+	(*racine)->f_droite=(*n);
+}
+
+void ajouter_fils_gauche(p_noeud *racine,p_noeud *n){
+	(*racine)->f_gauche=(*n);
+}
