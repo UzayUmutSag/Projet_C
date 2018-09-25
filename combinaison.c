@@ -5,8 +5,8 @@
 
 p_comb creer_combinaison (char* l,int o){
 	p_comb c =(p_comb) malloc(sizeof(struct combinaison));
-	c->lettre = (char*)malloc(sizeof(strlen(l)));
-	memcpy(c->lettre,l,sizeof(strlen(l)));
+	c->lettre = (char*)malloc(sizeof(strlen(l))*sizeof(char));
+	memcpy(c->lettre,l,sizeof(strlen(l)*sizeof(char)));
 	c->occ = o;
 	return c;
 }
@@ -35,11 +35,18 @@ int comparer_combinaison(p_comb a, p_comb b){
 }
 
 p_comb fusion_combinaison(p_comb a, p_comb b){
-	int taille = strlen(a->lettre)+strlen(b->lettre);
-	char * l = (char*) malloc(sizeof(taille));
-	sprintf(l,"%s%s",a->lettre,b->lettre);
+	int taille = (int)strlen(a->lettre)+strlen(b->lettre);
+	char * l = (char*) malloc(sizeof(taille)*sizeof(char));
+	strcpy(l,a->lettre);
+	strcat(l,b->lettre);
 	int o = a->occ+b->occ;
 	p_comb res = creer_combinaison(l,o);
 	free(l);
 	return res;
+}
+
+p_comb copier_combinaison(p_comb comb){
+	p_comb b = (p_comb)malloc(sizeof(struct combinaison));
+	b=creer_combinaison(comb->lettre,comb->occ);
+	return b;
 }

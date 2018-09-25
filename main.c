@@ -3,16 +3,7 @@
 #include "noeud.h"
 
 void _copier(void* _val, void** ptr){
-		(*ptr)=(p_comb) malloc(sizeof(struct combinaison));
-		char l[strlen(((p_comb)_val)->lettre)] = *((p_comb)_val)->lettre;
-		*ptr=creer_combinaison(&l,((p_comb)_val)->occ);
-
-
-		/*char* l = (char*)malloc(sizeof(strlen(((p_comb)_val)->lettre)));
-		memcpy(l,((p_comb)_val)->lettre,sizeof(strlen(((p_comb)_val)->lettre)));
-		*ptr = creer_combinaison(l,((p_comb)_val)->occ);	
-		free(l);
-		l=NULL;*/
+		(*ptr)=creer_combinaison(((p_comb)_val)->lettre,((p_comb)_val)->occ);
 }
 
 void _detruire(void** ptr){
@@ -59,38 +50,49 @@ int main (void) {
 	afficher_combinaison(a);
 
 	afficher_combinaison(b);
-
-	//p_comb res = fusion_combinaison(a,b);
-
-
-
-
-	//afficher_combinaison(res);
-
 	
+
+	p_comb res = fusion_combinaison(a,b);
+
+
+
+
+	afficher_combinaison(res);
+
+	supprimer_combinaison(&b);
+	supprimer_combinaison(&a);
+	supprimer_combinaison(&res);
+
+
+/*
 
 	printf("\n&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\n\n");
 
 	p_arbre a1 = creer_arbre(a,&_copier);
 	p_arbre a2 = creer_arbre(b,&_copier);
-		supprimer_combinaison(&a);
-	supprimer_combinaison(&b);
 
-	afficher_arbre(a1,_afficher);
+
+
+	
 	afficher_arbre(a2,_afficher);
+	
+	
+	
+	afficher_arbre(a1,_afficher);
+	
 
 	printf("arbre fusioné\n");
 
 
-	//p_arbre res_arbre_1 = fusion_arbre(a1,a2,&_fusion,&_copier,&_comparer);
+	p_arbre res_arbre_1 = fusion_arbre(a1,a2,&_fusion,&_copier,&_comparer);
 
-	detruire_tout(&a1,&_detruire);
+	
 	detruire_tout(&a2,&_detruire);
+	detruire_tout(&a1,&_detruire);
+	detruire_tout(&res_arbre_1,&_detruire);
+	
 
-	//detruire_tout(&res_arbre_1,&_detruire);
-	//supprimer_combinaison(&res);
-
-
+*/
 
 	
 	/*p_arbre res_arbre_2 = fusion_arbre(a1,a2,&_fusion,&_copier,&_comparer);
