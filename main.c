@@ -3,7 +3,8 @@
 #include "noeud.h"
 
 void _copier(void* _val, void** ptr){
-		(*ptr)=creer_combinaison(((p_comb)_val)->lettre,((p_comb)_val)->occ);
+	(*ptr)=creer_combinaison(   (*((p_comb*)(_val)))->lettre , (*((p_comb*)(_val)))->occ  );
+	supprimer_combinaison( (p_comb*) _val);
 }
 
 void _detruire(void** ptr){
@@ -20,10 +21,7 @@ int _comparer(void* c1, void* c2) {
 }
 
 void* _fusion(void* c1 , void* c2){
-	if(comparer_combinaison((p_comb)c1,(p_comb)c2)<0)
-		return fusion_combinaison((p_comb)c1,(p_comb)c2);
-	else
-		return fusion_combinaison((p_comb)c2,(p_comb)c1);
+	return fusion_combinaison((p_comb)c1,(p_comb)c2);
 }
 
 
@@ -32,124 +30,51 @@ void* _fusion(void* c1 , void* c2){
 int main (void) {
 
 
-	/*char * l1="uzay";
-	char * l2="umut";
-
-	int taille = strlen(l1)+strlen(l2);
-
-	char res [taille];
-
-	sprintf(res,"%s%s",l1,l2);
-
-
-	printf("%s\n", res);*/
-	char * l1 = "uzay";
-	char *l2 = " umut";
-	p_comb a = creer_combinaison(l1,1);
-
-	p_comb b = creer_combinaison(l2,2);
-
-
-	afficher_combinaison(a);
-
-	afficher_combinaison(b);
-	
-
-	p_comb res = fusion_combinaison(a,b);
-
-
-
-
-	afficher_combinaison(res);
-
-	supprimer_combinaison(&b);
-	//supprimer_combinaison(&a);
-	supprimer_combinaison(&res);
-
-
-	printf("\n&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\n\n");
-
-	p_arbre a1 = creer_arbre(a,&_copier);
-	supprimer_combinaison(&a);
-	afficher_arbre(a1,_afficher);
-
-
-	printf("test fusion : \n");
-
-	p_arbre fusion = fusion_arbre(a1,a1,&_fusion,&_copier,&_comparer);
-	afficher_arbre(fusion,&_afficher);
-	
-	detruire_tout(&fusion,&_detruire);
-	
-
-
-/*
-	p_arbre a2 = creer_arbre(b,&_copier);
-
-	supprimer_combinaison(&b);
+	p_comb a_comb = creer_combinaison("A",2);
+	p_arbre a = creer_arbre(&a_comb,&_copier);
+	afficher_arbre(a,&_afficher);
+	p_comb b_comb = creer_combinaison("B",1);
+	p_arbre b = creer_arbre(&b_comb,&_copier);
+	afficher_arbre(b,&_afficher);
 
 
 
 	
-	afficher_arbre(a2,_afficher);
+	p_arbre res_fus = fusion_arbre(&a,&b,&_fusion,&_comparer,&_copier);
+
+	printf("hauteur : %d \n", hauteur_arbre(res_fus) );
+
+	//detruire_tout(&b,&_detruire);
+	//detruire_tout(&a,&_detruire);
+
+	p_comb c_comb = creer_combinaison("C",2);
+	p_arbre c = creer_arbre(&c_comb,&_copier);
+	//supprimer_combinaison(&a_comb);
+	afficher_arbre(c,&_afficher);
+	p_comb d_comb = creer_combinaison("D",1);
+	p_arbre d = creer_arbre(&d_comb,&_copier);
+	//supprimer_combinaison(&b_comb);
+	afficher_arbre(d,&_afficher);
+
+
+	p_arbre res_fus_bis = fusion_arbre(&c,&d,&_fusion,&_comparer,&_copier);
+
+	p_arbre res = fusion_arbre(&res_fus,&res_fus_bis,&_fusion,&_comparer,&_copier);
+
+
+	
+	//detruire_tout(&res_fus,&_detruire);
+	//detruire_tout(&res_fus_bis,&_detruire);
+
+	afficher_arbre(res,_afficher);
+	printf("hauteur : %d \n", hauteur_arbre(res) );
+	detruire_tout(&res,&_detruire);
+
 	
 	
-	
 
 	
-
-	printf("arbre fusioné\n");
-
-
-	p_arbre res_arbre_1 = fusion_arbre(a1,a2,&_fusion,&_copier,&_comparer);
-
 	
-	detruire_tout(&a2,&_detruire);
-	
-	detruire_tout(&res_arbre_1,&_detruire);
-	
-
-*/
-
-	
-	/*p_arbre res_arbre_2 = fusion_arbre(a1,a2,&_fusion,&_copier,&_comparer);
-	p_arbre res_arbre = fusion_arbre(res_arbre_2,res_arbre_1,&_fusion,&_copier,&_comparer);
-	//detruire_tout(res_arbre_1,&_detruire);
-	afficher_arbre(res_arbre,&_afficher);
-
-	detruire_tout(&res_arbre,&_detruire);
-	afficher_arbre(res_arbre,&_afficher);
-
-	afficher_arbre(res_arbre_1,&_afficher);
-	detruire_tout(&a1,&_detruire);
-	detruire_tout(&a2,&_detruire);
-	detruire_tout(&res_arbre_1,&_detruire);
-	detruire_tout(&res_arbre_2,&_detruire);
-	supprimer_combinaison(&res);
-	supprimer_combinaison(&a);
-	supprimer_combinaison(&b);
-
-	p_comb uzay = creer_combinaison("uzay",1);
-	afficher_combinaison(uzay);
-	p_comb umut = creer_combinaison("umut",2);
-	afficher_combinaison(umut);
-
-	p_comb uzayumut = fusion_combinaison(umut,uzay);
-	afficher_combinaison(uzayumut);
-
-
-
-
-	supprimer_combinaison(&uzay);
-	supprimer_combinaison(&umut);
-	supprimer_combinaison(&uzayumut);*/
-
-
-
-
-
-
-
 
 
 	return 0;

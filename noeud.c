@@ -67,3 +67,11 @@ void ajouter_fils_droite(p_noeud *racine,p_noeud *n){
 void ajouter_fils_gauche(p_noeud *racine,p_noeud *n){
 	(*racine)->f_gauche=(*n);
 }
+
+int hauteur_noeud(p_noeud n){
+	if(n!=NULL){
+		return 1+(max ( hauteur_noeud(n->f_gauche) , hauteur_noeud(n->f_droite) ));
+	}else{
+		return 0;
+	}
+}

@@ -22,15 +22,33 @@ void afficher_arbre(p_arbre a , void(*_afficher)(void*)){
 	}
 }
 
-p_arbre fusion_arbre (p_arbre a1,p_arbre a2,void*(*_fusion)(void*, void*),void(*_copier)(void*,void**),int (*_comparer)(void*, void*)){
-	p_arbre res = creer_arbre(_fusion(get_valeur(a1->racine),get_valeur(a2->racine))   ,   _copier   );
-	if(_comparer(get_valeur(a1->racine),get_valeur(a2->racine))<0){
-		ajouter_fils_droite(&res->racine,&a2->racine);
-		ajouter_fils_gauche(&res->racine,&a1->racine);
-	}else{
-		ajouter_fils_droite(&res->racine,&a1->racine);
-		ajouter_fils_gauche(&res->racine,&a2->racine);
-	}
 
-	return res;
+p_arbre fusion_arbre(p_arbre * a1,p_arbre * a2,void*(*_fusion)(void*, void*),int (*_comparer)(void* c1, void* c2),void (*_copier)(void* _val, void** ptr) ){
+	p_arbre res_fusion;
+	if(_comparer(  get_valeur((*a1)->racine) , get_valeur((*a2)->racine)  ) <= 0) {
+		void* comb_fus = _fusion(get_valeur((*a1)->racine),get_valeur((*a2)->racine));
+		res_fusion = creer_arbre(  &comb_fus ,  _copier   );
+		ajouter_fils_gauche(&(res_fusion->racine),&((*a1)->racine));
+		ajouter_fils_droite(&(res_fusion->racine),&((*a2)->racine));
+	}else{
+		void* comb_fus = _fusion(get_valeur((*a1)->racine),get_valeur((*a2)->racine));
+		res_fusion = creer_arbre(   &comb_fus  ,  _copier   );
+		ajouter_fils_gauche(&(res_fusion->racine),&((*a2)->racine));
+		ajouter_fils_droite(&(res_fusion->racine),&((*a1)->racine));
+	}
+	(*a1)->racine = NULL;
+	(*a2)->racine = NULL;
+	free(*a1);
+	free(*a2);
+	(*a1)=NULL;
+	(*a2)=NULL;
+	return res_fusion;
+}
+
+int hauteur_arbre(p_arbre a){
+	if(a!=NULL){
+		return hauteur_noeud(a->racine);
+	}else{
+		return 0;
+	}
 }
