@@ -23,6 +23,7 @@ void afficher_arbre(p_arbre a , void(*_afficher)(void*)){
 }
 
 
+
 p_arbre fusion_arbre(p_arbre * a1,p_arbre * a2,void*(*_fusion)(void*, void*),int (*_comparer)(void* c1, void* c2),void (*_copier)(void* _val, void** ptr) ){
 	p_arbre res_fusion;
 	if(_comparer(  get_valeur((*a1)->racine) , get_valeur((*a2)->racine)  ) <= 0) {
@@ -52,3 +53,20 @@ int hauteur_arbre(p_arbre a){
 		return 0;
 	}
 }
+
+int existe_arbre(void* elt, p_arbre a,int(*_compare)(void*,void*)){
+	if(a!=NULL)
+		return existe_noeud(elt,a->racine,_compare);
+	return 0;
+}
+
+int nb_branches(p_arbre a){
+	if(a!=NULL) return nb_branches_noeud(a->racine);
+	return 0;
+}
+
+int nb_feuilles(p_arbre a){
+	if(a!=NULL) return nb_feuilles_noeud(a->racine);
+	return 0;
+}
+

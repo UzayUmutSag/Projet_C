@@ -16,6 +16,7 @@ void _afficher(void* _val){
 	afficher_combinaison((p_comb)_val);
 }
 
+
 int _comparer(void* c1, void* c2) {
 	return comparer_combinaison((p_comb)c1,(p_comb)c2); 
 }
@@ -25,6 +26,21 @@ void* _fusion(void* c1 , void* c2){
 }
 
 
+
+
+int _compare_existe(void* a, void* b){
+	char* ca = (char*)a;
+	p_comb cb = (p_comb)b;
+	int n = 0;
+	char* chaine_comb = cb->lettre;
+	for(unsigned int i=0; i<strlen(chaine_comb);i++)
+		for(unsigned int j=0; j<strlen(ca);j++)
+			if(chaine_comb[i]==ca[j])
+				n++;
+
+	return n;
+
+}
 
 
 int main (void) {
@@ -60,6 +76,7 @@ int main (void) {
 	p_arbre res_fus_bis = fusion_arbre(&c,&d,&_fusion,&_comparer,&_copier);
 
 	p_arbre res = fusion_arbre(&res_fus,&res_fus_bis,&_fusion,&_comparer,&_copier);
+
 
 
 	
