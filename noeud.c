@@ -112,4 +112,16 @@ int nb_feuilles_noeud(p_noeud n){
 		return nb_feuilles_noeud(n->f_droite)+nb_feuilles_noeud(n->f_gauche);
 }
 
+char* codeprefixe_noeud (p_noeud n,void* elt , char *code, int(*_compare)(void*,void*)){
+	if(existe_noeud(elt,get_fils_droite(n),_compare)!=0){
+		strcat(code,"1\0");
+		strcat(code,codeprefixe_noeud(get_fils_droite(n),elt,code,_compare));
+	}else if(existe_noeud(elt,get_fils_gauche(n),_compare)!=0){
+		strcat(code,"0\0");
+		strcat(code,codeprefixe_noeud(get_fils_gauche(n),elt,code,_compare));
+	}else{
+		return code;
+	}
+	return "";
+}
 

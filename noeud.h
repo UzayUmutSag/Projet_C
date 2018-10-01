@@ -38,5 +38,8 @@ int nb_branches_noeud(p_noeud);
 
 int nb_feuilles_noeud(p_noeud);
 
+char* codeprefixe_noeud (p_noeud,void*,char*,int(*_compare)(void*,void*));
+
+
 
 #endif

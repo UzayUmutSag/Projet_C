@@ -70,3 +70,13 @@ int nb_feuilles(p_arbre a){
 	return 0;
 }
 
+
+char* codeprefixe (p_arbre a,void* elt,int(*_compare)(void*,void*)){
+	if(existe_arbre(elt,a,_compare)){
+		char* code = (char*)malloc(10);
+		code = "";
+		return codeprefixe_noeud(a->racine,elt,code,_compare);
+	}else{
+		return "";
+	}
+}
