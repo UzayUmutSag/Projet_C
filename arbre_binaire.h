@@ -20,7 +20,7 @@ int existe_arbre(void*, p_arbre,int(*_compare)(void*,void*));
 int nb_branches(p_arbre);
 int nb_feuilles(p_arbre);
 
-char* codeprefixe (p_arbre,void*,int(*_compare)(void*,void*));
+int* codeprefixe (p_arbre,void*,int(*_compare)(void*,void*));
 
 
 #endif

@@ -85,8 +85,12 @@ int main (void) {
 
 	afficher_arbre(res,_afficher);
 	printf("Existe C : %d\n",existe_arbre("AF",res,&_compare_existe));
-	char * code = codeprefixe(res,"A",&_compare_existe);
+	int* code = codeprefixe(res,"A",&_compare_existe);
+	for(int i =0; code[i]>=0;i++)
+		printf("%d",code[i]);
+	printf("\n");
 	free(code);
+
 	printf("hauteur : %d \n", hauteur_arbre(res) );
 	detruire_tout(&res,&_detruire);
 
