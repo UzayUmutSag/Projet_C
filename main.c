@@ -80,7 +80,7 @@ p_comb* generer_combinaison(char* chaine){
 		return NULL;
 	}
 }
-
+//ccc
 /*p_arbre generer_arbre(char* s){
 
 }*/
