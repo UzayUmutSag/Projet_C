@@ -47,16 +47,16 @@ int main (void) {
 
 
 	p_comb a_comb = creer_combinaison("A",2);
-	p_arbre a = creer_arbre(&a_comb,&_copier);
-	afficher_arbre(a,&_afficher);
+	p_arbre a = creer_arbre(&a_comb,&_copier,&_fusion,&_afficher,&_comparer,&_detruire,&_compare_existe);
+	afficher_arbre(a);
 	p_comb b_comb = creer_combinaison("B",1);
-	p_arbre b = creer_arbre(&b_comb,&_copier);
-	afficher_arbre(b,&_afficher);
+	p_arbre b = creer_arbre(&b_comb,&_copier,&_fusion,&_afficher,&_comparer,&_detruire,&_compare_existe);
+	afficher_arbre(b);
 
 
 
 	
-	p_arbre res_fus = fusion_arbre(&a,&b,&_fusion,&_comparer,&_copier);
+	p_arbre res_fus = fusion_arbre(&a,&b);
 
 	printf("hauteur : %d \n", hauteur_arbre(res_fus) );
 
@@ -64,18 +64,18 @@ int main (void) {
 	//detruire_tout(&a,&_detruire);
 
 	p_comb c_comb = creer_combinaison("C",2);
-	p_arbre c = creer_arbre(&c_comb,&_copier);
+	p_arbre c = creer_arbre(&c_comb,&_copier,&_fusion,&_afficher,&_comparer,&_detruire,&_compare_existe);
 	//supprimer_combinaison(&a_comb);
-	afficher_arbre(c,&_afficher);
+	afficher_arbre(c);
 	p_comb d_comb = creer_combinaison("D",1);
-	p_arbre d = creer_arbre(&d_comb,&_copier);
+	p_arbre d = creer_arbre(&d_comb,&_copier,&_fusion,&_afficher,&_comparer,&_detruire,&_compare_existe);
 	//supprimer_combinaison(&b_comb);
-	afficher_arbre(d,&_afficher);
+	afficher_arbre(d);
 
 
-	p_arbre res_fus_bis = fusion_arbre(&c,&d,&_fusion,&_comparer,&_copier);
+	p_arbre res_fus_bis = fusion_arbre(&c,&d);
 
-	p_arbre res = fusion_arbre(&res_fus,&res_fus_bis,&_fusion,&_comparer,&_copier);
+	p_arbre res = fusion_arbre(&res_fus,&res_fus_bis);
 
 
 
@@ -83,16 +83,16 @@ int main (void) {
 	//detruire_tout(&res_fus,&_detruire);
 	//detruire_tout(&res_fus_bis,&_detruire);
 
-	afficher_arbre(res,_afficher);
-	printf("Existe C : %d\n",existe_arbre("AF",res,&_compare_existe));
-	int* code = codeprefixe(res,"A",&_compare_existe);
-	for(int i =0; code[i]>=0;i++)
-		printf("%d",code[i]);
+	afficher_arbre(res);
+	printf("Existe C : %d\n",existe_arbre("AF",res));
+	char* code = codeprefixe(res,"A");
+	
+		printf("%s",code);
 	printf("\n");
 	free(code);
 
 	printf("hauteur : %d \n", hauteur_arbre(res) );
-	detruire_tout(&res,&_detruire);
+	detruire_tout(&res);
 
 	
 	

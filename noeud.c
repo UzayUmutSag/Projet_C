@@ -112,15 +112,17 @@ int nb_feuilles_noeud(p_noeud n){
 		return nb_feuilles_noeud(n->f_droite)+nb_feuilles_noeud(n->f_gauche);
 }
 
-int* codeprefixe_noeud (p_noeud n,void* elt , int *code, int(*_compare)(void*,void*)){
-	if(existe_noeud(elt,get_fils_droite(n),_compare)!=0){
-		(*code)=1;
-		codeprefixe_noeud(get_fils_droite(n),elt,(code+1),_compare);
-	}else if(existe_noeud(elt,get_fils_gauche(n),_compare)!=0){
-		(*code)=0;
-		codeprefixe_noeud(get_fils_gauche(n),elt,(code+1),_compare);
+char* codeprefixe_noeud (p_noeud n,void* elt , char *code, int(*_compare)(void*,void*)){
+	p_noeud fd = get_fils_droite(n);
+	p_noeud fg = get_fils_gauche(n);
+	if(fd&&existe_noeud(elt,fd,_compare)!=0){
+		(*code)='1';
+		codeprefixe_noeud(fd,elt,(code+1),_compare);
+	}else if(fg&&existe_noeud(elt,fg,_compare)!=0){
+		(*code)='0';
+		codeprefixe_noeud(fg,elt,(code+1),_compare);
 	}else{
-		(*code)=-1;
+		*(code)='\0';
 	}
 	return code;
 }
