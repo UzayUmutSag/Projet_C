@@ -7,13 +7,14 @@
 #include "noeud_generique.h"
 #include "liste_generique.h"
 
-lst creer_liste(void(*_copier)(void*, void**), void(*_detruire)(void**), void(*_afficher)(void*)) {
+lst creer_liste(void(*_copier)(void*, void**), void(*_detruire)(void**), void(*_afficher)(void*),void(*_comparer)(void*,void*)) {
     lst l = (lst)malloc(sizeof(struct liste));
     l->tete = NULL;
     l->queue = NULL;
     l->copier = _copier;
     l->detruire = _detruire;
     l->afficher = _afficher;
+    l->comaprer = _comparer;
     l->taille = 0;
     return l;
 }
@@ -30,6 +31,27 @@ void ajouter_liste_fin(void* _val,lst l) {
     }
     l->taille++;
 }
+
+void ajouter_liste_tri(void* _val,lst l){
+    nd n = creer_noeud(_val,l->copier);
+    if(l->tete == NULL){
+        l->tete = n;
+        l->queue = n;
+    }else{
+        nd p = l->tete;
+        nd s = (l->tete)->suivant;
+        if(l->comaprer(p->val,n->val)<=0){
+            n->suivant=p;
+            l->tete=n;
+        }else{
+            while(s->suivant != NULL){
+                
+            }
+        }
+    }
+}
+
+
 
 void supprimer_liste_fin(lst l){
     nd tmp = l->tete;

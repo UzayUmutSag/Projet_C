@@ -85,3 +85,8 @@ char* codeprefixe (p_arbre a,void* elt){
 		return NULL;
 	}
 }
+
+int comaprer_arbre(p_arbre a1,p_arbre a2){
+	return a1->_compare(a1->racine,a2->racine);
+}
+

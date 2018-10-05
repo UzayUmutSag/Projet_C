@@ -21,6 +21,7 @@ void afficher_arbre(p_arbre a);
 p_arbre fusion_arbre(p_arbre * a1,p_arbre * a2);
 
 int hauteur_arbre(p_arbre a);
+int comaprer_arbre(p_arbre,p_arbre);
 
 int existe_arbre(void*, p_arbre);
 int nb_branches(p_arbre);
