@@ -42,6 +42,49 @@ int _compare_existe(void* a, void* b){
 
 }
 
+p_comb* generer_combinaison(char* chaine){
+	if(	chaine!=NULL && strlen(chaine)!=0){
+		int taille_chaine = strlen(chaine);
+		char* t = (char*) malloc(sizeof(char)+1);
+		int * tab = (int*)malloc(sizeof(int));
+		int taille_t = 1;
+		t[0]=chaine[0];
+		tab[0]=1;
+		int b=0;
+	    for (int c = 1 ; c < taille_chaine; c++) {
+	        b=0;
+	    	for (int i = 0 ; i < taille_t && b==0; i++ ) {
+	    		if (chaine[c]==t[i]) {
+	    			b=1;
+	    			tab[i]++;
+	    		}
+	    	}
+	    	if(b!=1){
+	    		taille_t++;
+	    		t=realloc(t,taille_t*sizeof(char)+1);
+	    		tab=realloc(tab,taille_t*sizeof(int));
+	    		t[taille_t-1]=chaine[c];
+	    		tab[taille_t-1]=1;
+	    	}
+	    }
+	    p_comb* tab_comb = (p_comb*) malloc((taille_t+1)*sizeof(struct combinaison));
+	    tab_comb[0]=creer_combinaison("taille",taille_t+1);
+	    for(int i = 0 ; i<taille_t+1 ; i++){
+	    	char s[2]={t[i],'\0'};
+	    	tab_comb[i+1]=creer_combinaison(s,tab[i]);
+	    }
+	    free(t);
+	    free(tab);
+	    return tab_comb;
+	}else{
+		return NULL;
+	}
+}
+
+/*p_arbre generer_arbre(char* s){
+
+}*/
+
 
 int main (void) {
 
