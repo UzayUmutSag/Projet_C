@@ -83,7 +83,7 @@ p_comb* generer_combinaison(char* chaine){
 
 /*p_arbre generer_arbre(char* s){
 
-}*/
+}*///jbjhjn
 
 
 int main (void) {
