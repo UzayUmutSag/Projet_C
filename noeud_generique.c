@@ -9,7 +9,7 @@
 #include "noeud_generique.h"
 
 nd creer_noeud_generique(void* _val, void(* _copier)(void*, void**)) {
-    nd n = (nd)malloc(sizeof(struct noeud));
+    nd n = (nd)malloc(sizeof(struct noeud_generique));
     _copier(_val, &(n->val));
     n->suivant = NULL;
     return n;
@@ -23,20 +23,7 @@ void ajouter_noeud_fin(void* _val, nd n, void(* _copier)(void*, void**)) {
     tmp->suivant = n_add;
 }
 
-void ajouter_en_place(void* _val,nd tete,nd queue,int taille,void(* _copier)(void*, void**), int (* _comparer)(void*,void*)){
-    nd n_add=creer_noeud_generique(_val,_copier);
-    if(taille==1){
-        if(_comparer(_val,tete->val)<=0){
-            n_add->suivant=tete;
-            tete=n_add;
-        }else{
-            tete->suivant=n_add;
-            queue=n_add;
-        }
-    }else{
-        
-    }
-}
+
 
 
 
@@ -73,5 +60,9 @@ void afficher_tout_generique(nd n, void(* _afficher)(void*)){
     }
     _afficher(tmp->val);
     printf("\n");
+}
+
+void *get_val_noeud(nd n){
+    return n->val;
 }
 

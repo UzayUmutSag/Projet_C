@@ -134,8 +134,8 @@ int main (void) {
 	ajouter_liste_tri(&b,l);
 	afficher_liste(l);
 	
-	//ajouter_liste_tri(&a,l);
-	//afficher_liste(l);
+	ajouter_liste_tri(&a,l);
+	afficher_liste(l);
 	
 	ajouter_liste_tri(&c,l);
 	afficher_liste(l);
