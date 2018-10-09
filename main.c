@@ -26,6 +26,11 @@ void* _fusion(void* c1 , void* c2){
 	return fusion_combinaison((p_comb)c1,(p_comb)c2);
 }
 
+void _detruire_arbre(void** ptr){
+	detruire_tout((p_arbre*) ptr);
+	*ptr=NULL;
+}
+
 
 
 
@@ -61,17 +66,21 @@ p_comb* generer_combinaison(char* chaine,int * taille){
 	    		}
 	    	}
 	    	if(b!=1){
-	    		taille_t++;
+	    		taille_t+=1;
 	    		t=realloc(t,taille_t*sizeof(char)+1);
-	    		tab=realloc(tab,taille_t*sizeof(int));
+	    		tab=realloc(tab,taille_t*sizeof(int)+1);
 	    		t[taille_t-1]=chaine[c];
+	    		t[taille_t]='\0';
 	    		tab[taille_t-1]=1;
 	    	}
 	    }
 	    p_comb* tab_comb = (p_comb*) malloc((taille_t)*sizeof(struct combinaison));
 	    for(int i = 0 ; i<taille_t+1 ; i++){
-	    	char s[2]={t[i],'\0'};
+	    	char* s =malloc(sizeof(char)*2); 
+	    	s[0]=t[i];
+	    	s[1]='\0';
 	    	tab_comb[i]=creer_combinaison(s,tab[i]);
+	    	free(s);
 	    }
 	    *taille=taille_t;
 	    free(t);
@@ -91,19 +100,20 @@ p_arbre generer_arbre(char* s){
 	p_arbre b=NULL;
 	p_arbre f=NULL;
 	p_comb* tab_comb= generer_combinaison(s,&taille);
-	lst l=creer_liste(& copier_arbre,& detruire_tout,& afficher_arbre,& comparer_arbre_liste);
+	lst l=creer_liste(& copier_arbre,& _detruire_arbre,& afficher_arbre,& comparer_arbre_liste);
 	for(int i = 0 ; i<taille ; i++){
 		a=creer_arbre(&(tab_comb[i]),&_copier,&_fusion,&_afficher,&_comparer,&_detruire,&_compare_existe);
 		ajouter_liste_tri(&a,l);
 	}
+	free(tab_comb);
 	while(l->taille>=2){
-		a=depiler_tete(l);
-		b=depiler_tete(l);
+		a=(p_arbre)depiler_tete(l);
+		b=(p_arbre)depiler_tete(l);
 		f=fusion_arbre(&a,&b);
-		ajouter_liste_tri(&f,l);
+		ajouter_liste_tri(&f,l); 
 	}
 	a=depiler_tete(l);
-	free(tab_comb);
+	
 	detruire_liste(&l);
 	return a;
 }
@@ -111,7 +121,7 @@ p_arbre generer_arbre(char* s){
 
 int main (void) {
 
-
+/*
 	p_comb a_comb = creer_combinaison("A",1);
 	p_comb b_comb = creer_combinaison("B",1);
 	p_comb c_comb = creer_combinaison("C",2);
@@ -152,7 +162,7 @@ int main (void) {
 	printf("\nFIN MES ARBRES\n\n");
 
 
-	lst l=creer_liste(& copier_arbre,& detruire_tout,& afficher_arbre,& comparer_arbre_liste);
+	lst l=creer_liste(& copier_arbre,& _detruire_arbre,& afficher_arbre,& comparer_arbre_liste);
 	ajouter_liste_tri(&b,l);
 	afficher_liste(l);
 	
@@ -168,13 +178,17 @@ int main (void) {
 	afficher_liste(l);
 
 	detruire_liste(&l);
-	
-	p_arbre test_arbre = generer_arbre("uzay umut sag/ozgur deniz sag/yagiz meric sag");
+
+*/
+	char* s = "uzay umut sag/ozgur deniz sag/yagiz meric sag";
+	p_arbre test_arbre = generer_arbre(s);
 
 	afficher_arbre(test_arbre);
 	
 	detruire_tout(&test_arbre);
+	
 
+		
 	return 0;
 
 }

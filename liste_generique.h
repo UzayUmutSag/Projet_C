@@ -10,7 +10,7 @@
 
 struct liste {
     int taille;
-    nd tete;
+    ndg tete;
     void(*copier)(void*, void**);
     void(*detruire)(void**);
     void(*afficher)(void*);

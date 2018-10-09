@@ -10,13 +10,13 @@ struct noeud_generique {
     struct noeud_generique* suivant;
 };
 
-typedef struct noeud_generique* nd;
+typedef struct noeud_generique* ndg;
 
-nd creer_noeud_generique(void* _val, void(* _copier)(void*, void**));
-void ajouter_noeud_fin(void* _val, nd n, void(* _copier)(void*, void**));
-void supprimer_noeud_fin(nd n, void(* _detruire)(void**));
-void detruire_n_generique(nd* n, void(* _detruire)(void**));
-void afficher_tout_generique(nd n, void(* afficher)(void*));
+ndg creer_noeud_generique(void* _val, void(* _copier)(void*, void**));
+void ajouter_noeud_fin(void* _val, ndg n, void(* _copier)(void*, void**));
+void supprimer_noeud_fin(ndg n, void(* _detruire)(void**));
+void detruire_n_generique(ndg* n, void(* _detruire)(void**));
+void afficher_tout_generique(ndg n, void(* afficher)(void*));
 
 
 #endif //UNTITLED_NOEUD_GENERIQUE_H

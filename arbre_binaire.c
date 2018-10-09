@@ -14,7 +14,7 @@ p_arbre creer_arbre(void * elt,void(*_copier)(void*,void**),void* (*_fusion)(voi
 }
 
 
-void detruire_tout(void** a){
+void detruire_tout(p_arbre* a){
 	detruire_tout_noeud(&(*((p_arbre*)a))->racine,(*((p_arbre*)a))->_detruire);
 	free(*a);
 	*a=NULL;

@@ -14,11 +14,11 @@ lst creer_liste(void(*_copier)(void*, void**), void(*_detruire)(void**), void(*_
 }
 
 /*void ajouter_liste_fin(void* _val,lst l) {
-    nd n = creer_noeud_generique(_val ,l->copier);
+    ndg n = creer_noeud_generique(_val ,l->copier);
     if (l->tete==NULL) {
         l->tete=n;        
     }else{
-        nd tmp=(l->tete);
+        ndg tmp=(l->tete);
         while(tmp->suivant!=NULL)
             tmp=tmp->suivant;
         tmp->suivant=n;
@@ -27,7 +27,7 @@ lst creer_liste(void(*_copier)(void*, void**), void(*_detruire)(void**), void(*_
 }*/
 
 void ajouter_liste_tri(void* _val,lst l){
-    nd n_add=creer_noeud_generique(_val,l->copier);
+    ndg n_add=creer_noeud_generique(_val,l->copier);
     if(l->tete==NULL){
         (l->tete) = n_add;
     }else{
@@ -38,8 +38,8 @@ void ajouter_liste_tri(void* _val,lst l){
             if((l->tete)->suivant==NULL)
                 (l->tete)->suivant=n_add;
             else{
-                nd tmp=(l->tete);
-                nd tmp_s=tmp->suivant;
+                ndg tmp=(l->tete);
+                ndg tmp_s=tmp->suivant;
                 while(tmp->suivant!=NULL && (l->comparer)(_val,(tmp->suivant)->val)>0){
                     tmp=tmp_s;
                     tmp_s=tmp_s->suivant;
@@ -62,7 +62,7 @@ void afficher_liste(lst l) {
 }
 
 void* rechercher_max_liste(lst l,int(*_comparer)(void* _val1, void* _val2)) {
-    nd tmp = l->tete;
+    ndg tmp = l->tete;
     void *max = tmp->val;
     for (int i = 1; i < l->taille; i++) {
       tmp = tmp->suivant;
@@ -74,7 +74,7 @@ void* rechercher_max_liste(lst l,int(*_comparer)(void* _val1, void* _val2)) {
 }
 
 void* depiler_tete(lst l){
-    nd tmp = l->tete;
+    ndg tmp = l->tete;
     l->tete=(l->tete)->suivant;
     l->taille--;
     return tmp->val;
