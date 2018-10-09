@@ -29,4 +29,6 @@ void ajouter_liste_tri(void*,lst);
 
 void* rechercher_max_liste(lst l,int(*_comparer)(void* _val1, void* _val2));
 
+void* depiler_tete(lst l);
+
 #endif //UNTITLED_LISTE_GENERIQUE_H

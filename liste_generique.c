@@ -72,3 +72,10 @@ void* rechercher_max_liste(lst l,int(*_comparer)(void* _val1, void* _val2)) {
     }
     return max;
 }
+
+void* depiler_tete(lst l){
+    nd tmp = l->tete;
+    l->tete=(l->tete)->suivant;
+    l->taille--;
+    return tmp->val;
+}

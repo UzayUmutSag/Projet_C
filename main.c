@@ -43,7 +43,7 @@ int _compare_existe(void* a, void* b){
 
 }
 
-p_comb* generer_combinaison(char* chaine){
+p_comb* generer_combinaison(char* chaine,int * taille){
 	if(	chaine!=NULL && strlen(chaine)!=0){
 		int taille_chaine = strlen(chaine);
 		char* t = (char*) malloc(sizeof(char)+1);
@@ -68,12 +68,12 @@ p_comb* generer_combinaison(char* chaine){
 	    		tab[taille_t-1]=1;
 	    	}
 	    }
-	    p_comb* tab_comb = (p_comb*) malloc((taille_t+1)*sizeof(struct combinaison));
-	    tab_comb[0]=creer_combinaison("taille",taille_t+1);
+	    p_comb* tab_comb = (p_comb*) malloc((taille_t)*sizeof(struct combinaison));
 	    for(int i = 0 ; i<taille_t+1 ; i++){
 	    	char s[2]={t[i],'\0'};
-	    	tab_comb[i+1]=creer_combinaison(s,tab[i]);
+	    	tab_comb[i]=creer_combinaison(s,tab[i]);
 	    }
+	    *taille=taille_t;
 	    free(t);
 	    free(tab);
 	    return tab_comb;
@@ -81,10 +81,32 @@ p_comb* generer_combinaison(char* chaine){
 		return NULL;
 	}
 }
-//ccc
-/*p_arbre generer_arbre(char* s){
 
-}*///jbjhjn
+
+
+
+p_arbre generer_arbre(char* s){
+	int taille=0;
+	p_arbre a=NULL;
+	p_arbre b=NULL;
+	p_arbre f=NULL;
+	p_comb* tab_comb= generer_combinaison(s,&taille);
+	lst l=creer_liste(& copier_arbre,& detruire_tout,& afficher_arbre,& comparer_arbre_liste);
+	for(int i = 0 ; i<taille ; i++){
+		a=creer_arbre(&(tab_comb[i]),&_copier,&_fusion,&_afficher,&_comparer,&_detruire,&_compare_existe);
+		ajouter_liste_tri(&a,l);
+	}
+	while(l->taille>=2){
+		a=depiler_tete(l);
+		b=depiler_tete(l);
+		f=fusion_arbre(&a,&b);
+		ajouter_liste_tri(&f,l);
+	}
+	a=depiler_tete(l);
+	free(tab_comb);
+	detruire_liste(&l);
+	return a;
+}
 
 
 int main (void) {
@@ -146,54 +168,12 @@ int main (void) {
 	afficher_liste(l);
 
 	detruire_liste(&l);
-	 
-/*
-
-
-	p_arbre res_fus = fusion_arbre(&a,&b);
-
-	printf("hauteur : %d \n", hauteur_arbre(res_fus) );
-
-	//detruire_tout(&b,&_detruire);
-	//detruire_tout(&a,&_detruire);
-
-	p_comb c_comb = creer_combinaison("C",2);
-	p_arbre c = creer_arbre(&c_comb,&_copier,&_fusion,&_afficher,&_comparer,&_detruire,&_compare_existe);
-	//supprimer_combinaison(&a_comb);
-	afficher_arbre(c);
-	p_comb d_comb = creer_combinaison("D",1);
-	p_arbre d = creer_arbre(&d_comb,&_copier,&_fusion,&_afficher,&_comparer,&_detruire,&_compare_existe);
-	//supprimer_combinaison(&b_comb);
-	afficher_arbre(d);
-
-
-	p_arbre res_fus_bis = fusion_arbre(&c,&d);
-
-	p_arbre res = fusion_arbre(&res_fus,&res_fus_bis);
-
-
-
 	
-	//detruire_tout(&res_fus,&_detruire);
-	//detruire_tout(&res_fus_bis,&_detruire);
+	p_arbre test_arbre = generer_arbre("uzay umut sag/ozgur deniz sag/yagiz meric sag");
 
-	afficher_arbre(res);
-	printf("Existe C : %d\n",existe_arbre("AF",res));
-	char* code = codeprefixe(res,"A");
+	afficher_arbre(test_arbre);
 	
-		printf("%s",code);
-	printf("\n");
-	free(code);
-
-	printf("hauteur : %d \n", hauteur_arbre(res) );
-	detruire_tout(&res);
-	*/
-	
-	
-
-	
-	
-
+	detruire_tout(&test_arbre);
 
 	return 0;
 
