@@ -29,11 +29,13 @@ void afficher_combinaison(p_comb c){
 
 
 int comparer_combinaison(p_comb a, p_comb b){
-    if(a->occ == b->occ)
-            return strcmp(a->lettre, b->lettre);
-    else
-            return a->occ > b->occ ? 1 : -1;
-
+    if(a->occ > b->occ){
+    	return 1;
+    }else if (a->occ < b->occ){
+    	return -1;
+    }else{
+    	return strcmp(a->lettre, b->lettre);
+    }
 }
 
 p_comb fusion_combinaison(p_comb a, p_comb b){

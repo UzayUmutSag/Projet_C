@@ -1,6 +1,7 @@
 #include "arbre_binaire.h"
 #include "combinaison.h"
 #include "noeud.h"
+#include "liste_generique.h"
 
 void _copier(void* _val, void** ptr){
 	(*ptr)=creer_combinaison(   (*((p_comb*)(_val)))->lettre , (*((p_comb*)(_val)))->occ  );
@@ -89,16 +90,66 @@ p_comb* generer_combinaison(char* chaine){
 int main (void) {
 
 
-	p_comb a_comb = creer_combinaison("A",2);
-	p_arbre a = creer_arbre(&a_comb,&_copier,&_fusion,&_afficher,&_comparer,&_detruire,&_compare_existe);
-	afficher_arbre(a);
+	p_comb a_comb = creer_combinaison("A",1);
 	p_comb b_comb = creer_combinaison("B",1);
+	p_comb c_comb = creer_combinaison("C",2);
+	p_comb d_comb = creer_combinaison("D",1);
+
+	printf("\n *** COMPARAISON COMBONAISON *** \n");
+	printf("%d\n",comparer_combinaison(a_comb,b_comb));
+	printf("%d\n",comparer_combinaison(b_comb,c_comb));
+	printf("%d\n",comparer_combinaison(c_comb,d_comb));
+	printf("%d\n",comparer_combinaison(d_comb,a_comb));
+	printf("%d\n",comparer_combinaison(c_comb,a_comb));
+	printf("%d\n",comparer_combinaison(d_comb,b_comb));
+	printf("%d\n",comparer_combinaison(d_comb,d_comb));
+	printf("\n *** FIN COMPARAISON COMBONAISON *** \n");
+
+
+
+	p_arbre a = creer_arbre(&a_comb,&_copier,&_fusion,&_afficher,&_comparer,&_detruire,&_compare_existe);
 	p_arbre b = creer_arbre(&b_comb,&_copier,&_fusion,&_afficher,&_comparer,&_detruire,&_compare_existe);
+	p_arbre c = creer_arbre(&c_comb,&_copier,&_fusion,&_afficher,&_comparer,&_detruire,&_compare_existe);
+	p_arbre d = creer_arbre(&d_comb,&_copier,&_fusion,&_afficher,&_comparer,&_detruire,&_compare_existe);
+
+	printf("\n *** COMPARAISON ARBRES *** \n\n");
+	printf("%d\n",comparer_arbre(a,b));
+	printf("%d\n",comparer_arbre(b,c));
+	printf("%d\n",comparer_arbre(c,d));
+	printf("%d\n",comparer_arbre(d,a));
+	printf("%d\n",comparer_arbre(c,a));
+	printf("%d\n",comparer_arbre(d,b));
+	printf("%d\n",comparer_arbre(d,d));
+	printf("\n *** FIN COMPARAISON ARBRES *** \n");
+
+	printf("\nMES ARBRES\n");
+	afficher_arbre(a);
 	afficher_arbre(b);
+	afficher_arbre(c);
+	afficher_arbre(d);
+	printf("\nFIN MES ARBRES\n\n");
 
 
-
+	lst l=creer_liste(& copier_arbre,& detruire_tout,& afficher_arbre,& comparer_arbre_liste);
+	ajouter_liste_tri(&b,l);
+	afficher_liste(l);
 	
+	//ajouter_liste_tri(&a,l);
+	//afficher_liste(l);
+	
+	ajouter_liste_tri(&c,l);
+	afficher_liste(l);
+	
+	ajouter_liste_tri(&d,l);
+	afficher_liste(l);
+	
+	afficher_liste(l);
+
+	detruire_liste(&l);
+	 
+/*
+
+
 	p_arbre res_fus = fusion_arbre(&a,&b);
 
 	printf("hauteur : %d \n", hauteur_arbre(res_fus) );
@@ -136,7 +187,7 @@ int main (void) {
 
 	printf("hauteur : %d \n", hauteur_arbre(res) );
 	detruire_tout(&res);
-
+	*/
 	
 	
 

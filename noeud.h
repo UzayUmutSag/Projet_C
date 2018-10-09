@@ -7,6 +7,8 @@
 
 #define max(a,b) (a>=b?a:b)
 
+
+
 typedef struct noeud* p_noeud;
 
 p_noeud creer_noeud (void* elt,void(*_copier)(void*,void**)) ;
@@ -39,6 +41,8 @@ int nb_branches_noeud(p_noeud);
 int nb_feuilles_noeud(p_noeud);
 
 char* codeprefixe_noeud (p_noeud,void*,char*,int(*_compare)(void*,void*));
+
+int comparer_noeud(p_noeud n1,p_noeud n2,int (*_compare)(void*,void*));
 
 
 

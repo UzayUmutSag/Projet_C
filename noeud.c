@@ -127,3 +127,6 @@ char* codeprefixe_noeud (p_noeud n,void* elt , char *code, int(*_compare)(void*,
 	return code;
 }
 
+int comparer_noeud(p_noeud n1,p_noeud n2,int (*_compare)(void*,void*)){
+	return _compare(n1->val,n2->val);
+}

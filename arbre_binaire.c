@@ -1,7 +1,7 @@
 #include "arbre_binaire.h"
 
 
-p_arbre creer_arbre(void * elt,void(*_copier)(void*,void**),void* (*_fusion)(void*,void*),void (*_afficher)(void*),int(*_compare)(void*,void*),void (*_detruire)(void**),int (*_existe)(void*,void*)){
+p_arbre creer_arbre(void * elt,void(*_copier)(void*,void**),void* (*_fusion)(void*,void*),	void (*_afficher)(void*),int(*_compare)(void*,void*),void (*_detruire)(void**),int (*_existe)(void*,void*)){
 	p_arbre a = (p_arbre)malloc(sizeof(struct arbre));
 	a->racine = creer_noeud(elt,_copier);
 	a->_copier=_copier;
@@ -14,15 +14,15 @@ p_arbre creer_arbre(void * elt,void(*_copier)(void*,void**),void* (*_fusion)(voi
 }
 
 
-void detruire_tout(p_arbre* a){
-	detruire_tout_noeud(&(*a)->racine,(*a)->_detruire);
+void detruire_tout(void** a){
+	detruire_tout_noeud(&(*((p_arbre*)a))->racine,(*((p_arbre*)a))->_detruire);
 	free(*a);
 	*a=NULL;
 }
 
-void afficher_arbre(p_arbre a){
+void afficher_arbre(void* a){
 	if(a!=NULL){
-		afficher_tout(a->racine,a->_afficher);
+		afficher_tout(((p_arbre)a)->racine,((p_arbre)a)->_afficher);
 	}else{
 		printf("vide\n");
 	}
@@ -86,7 +86,23 @@ char* codeprefixe (p_arbre a,void* elt){
 	}
 }
 
-int comaprer_arbre(p_arbre a1,p_arbre a2){
-	return a1->_compare(a1->racine,a2->racine);
+int comparer_arbre(p_arbre a1,p_arbre a2){
+	return comparer_noeud(a1->racine,a2->racine,a2->_compare);
+	//return ((*((p_arbre*)a1))->_compare)(  (*((p_arbre*)a1))->racine , ((p_arbre)a2)->racine   );
 }
+
+/*void _copier(void* _val, void** ptr){
+	(*ptr)=creer_combinaison(   (*((p_comb*)(_val)))->lettre , (*((p_comb*)(_val)))->occ  );
+	supprimer_combinaison( (p_comb*) _val);
+}*/
+
+void copier_arbre (void* a,void** ptr){
+	(*ptr) = (*((p_arbre*)a));
+	(a)=NULL;
+}
+
+int comparer_arbre_liste(void * a,void * b){
+	 return comparer_arbre(  (*((p_arbre*)a)) , ((p_arbre)b)   );
+}
+
 
