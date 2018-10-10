@@ -44,6 +44,8 @@ char* codeprefixe_noeud (p_noeud,void*,char*,int(*_compare)(void*,void*));
 
 int comparer_noeud(p_noeud n1,p_noeud n2,int (*_compare)(void*,void*));
 
+void* parcourir_noeud(p_noeud n, char* code);
+
 
 
 #endif

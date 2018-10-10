@@ -14,7 +14,7 @@ p_arbre creer_arbre(void * elt,void(*_copier)(void*,void**),void* (*_fusion)(voi
 }
 
 
-void detruire_tout(void** a){
+void detruire_tout(p_arbre* a){
 	detruire_tout_noeud(&(*((p_arbre*)a))->racine,(*((p_arbre*)a))->_detruire);
 	free(*a);
 	*a=NULL;
@@ -84,6 +84,12 @@ char* codeprefixe (p_arbre a,void* elt){
 	}else{
 		return NULL;
 	}
+}
+
+void* parcourir_arbre(p_arbre a, char* code){
+	if(a!=NULL&&code!=NULL)
+		return parcourir_noeud(a->racine,code);
+	return NULL;
 }
 
 int comparer_arbre(p_arbre a1,p_arbre a2){

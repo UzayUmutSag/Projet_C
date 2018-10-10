@@ -130,3 +130,22 @@ char* codeprefixe_noeud (p_noeud n,void* elt , char *code, int(*_compare)(void*,
 int comparer_noeud(p_noeud n1,p_noeud n2,int (*_compare)(void*,void*)){
 	return _compare(n1->val,n2->val);
 }
+
+
+void* parcourir_noeud(p_noeud n, char* code){
+	if(n!=NULL&&code!=NULL){
+		p_noeud fd = get_fils_droite(n);
+		p_noeud fg = get_fils_gauche(n);
+		if(fg!=NULL && fd!=NULL){
+			if(*code=='0'){
+				return parcourir_noeud(fg,code+1);
+			}else{
+				return parcourir_noeud(fd,code+1);
+			}
+		}else{
+			return get_valeur(n);
+		}
+
+	}else
+		return NULL;
+}

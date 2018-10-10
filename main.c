@@ -172,6 +172,13 @@ int main (void) {
 	p_arbre test_arbre = generer_arbre("uzay umut sag/ozgur deniz sag/yagiz meric sag");
 
 	afficher_arbre(test_arbre);
+
+	char* s = "001";
+
+	p_comb comb= parcourir_arbre(test_arbre,s);
+	afficher_combinaison(comb);
+	printf("%s\n", s);
+	comb=NULL;
 	
 	detruire_tout(&test_arbre);
 
