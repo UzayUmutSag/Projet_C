@@ -6,7 +6,7 @@ CFLAGS := -std=c99 -Wall -Wextra -pedantic -ggdb
 # règle de compilation --- exécutables
 all : main
 
-main : main.o arbre_binaire.o combinaison.o noeud.o liste_generique.o noeud_generique.o 
+main : main.o arbre_binaire.o combinaison.o noeud.o liste_generique.o noeud_generique.o
 	$(CC) $(CFLAGS) -o $@ $^	
 
 %.o: %.c

@@ -77,9 +77,5 @@ void* depiler_tete(lst l){
     nd tmp = l->tete;
     l->tete=(l->tete)->suivant;
     l->taille--;
-    void * res = tmp->val;
-    tmp->val=NULL;
-    free(tmp);
-    tmp = NULL;
-    return res;
+    return tmp->val;
 }
