@@ -112,4 +112,11 @@ p_arbre generer_arbre(char* s){
 	a=depiler_tete(l);
 	detruire_liste(&l);
 	return a;
+}           
+
+char* decoder(p_arbre a, char* code){
+	if(code!=NULL && a!=NULL){
+		return NULL;
+	}
+	return NULL;
 }

@@ -86,6 +86,12 @@ char* codeprefixe (p_arbre a,void* elt){
 	}
 }
 
+void* parcourir_arbre(p_arbre a, char* code){
+	if(a!=NULL&&code!=NULL)
+		return parcourir_noeud(a->racine,code);
+	return NULL;
+}
+
 int comparer_arbre(p_arbre a1,p_arbre a2){
 	return comparer_noeud(a1->racine,a2->racine,a2->_compare);
 	//return ((*((p_arbre*)a1))->_compare)(  (*((p_arbre*)a1))->racine , ((p_arbre)a2)->racine   );
