@@ -36,5 +36,7 @@ void copier_arbre (void* a,void** ptr);
 int comparer_arbre_liste(void * a,void * b);
 
 
+void * parcourir_arbre(p_arbre a, char* code,int*);
+
 
 #endif

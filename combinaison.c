@@ -52,3 +52,9 @@ p_comb fusion_combinaison(p_comb a, p_comb b){
 p_comb copier_combinaison(p_comb comb){
 	return creer_combinaison(comb->lettre,comb->occ);
 }
+
+char* get_lettre(p_comb comb){
+	char * c = (char*)malloc(sizeof(char)*(strlen(comb->lettre)+1));
+	strcpy(c,comb->lettre);
+	return c;
+}

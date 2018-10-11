@@ -24,5 +24,7 @@ p_comb fusion_combinaison(p_comb a, p_comb b);
 
 p_comb copier_combinaison(p_comb);
 
+char* get_lettre(p_comb comb);
+
 
 #endif
