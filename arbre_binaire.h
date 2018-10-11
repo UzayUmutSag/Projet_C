@@ -15,7 +15,7 @@ struct arbre{
 
 typedef struct arbre* p_arbre;
 p_arbre creer_arbre(void * elt,void(*_copier)(void*,void**),void* (*_fusion)(void*,void*),void (*_afficher)(void*),int (*_compare)(void*,void*),void (*_detruire)(void**),int (*_existe)(void*,void*));
-void detruire_tout(void** a);
+void detruire_tout(p_arbre* a);
 
 void afficher_arbre(void* a);
 
