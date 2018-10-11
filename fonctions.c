@@ -113,7 +113,7 @@ p_arbre generer_arbre(char* s){
 	a=depiler_tete(l);
 	detruire_liste(&l);
 	return a;
-<<<<<<< HEAD
+
 }
 
 char * encoder(p_arbre a,char * c){
@@ -136,6 +136,4 @@ char * encoder(p_arbre a,char * c){
 	return res;
 }
 
-=======
-}           
->>>>>>> 2c60fcadf3cbe3467285102677a75d192c04d9cd
+
