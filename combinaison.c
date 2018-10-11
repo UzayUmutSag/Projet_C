@@ -58,3 +58,7 @@ char* get_lettre(p_comb comb){
 	strcpy(c,comb->lettre);
 	return c;
 }
+
+int get_occ(p_comb comb){
+	return comb->occ;
+}

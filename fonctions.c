@@ -147,9 +147,33 @@ char* decoder(p_arbre a, char* code){
 	while(pos<(int)strlen(code)){
 		p_comb comb = parcourir_arbre(a,code+pos,&pos);
 		char* lettre = get_lettre(comb);
-		res=realloc(res,  (strlen(res)+strlen(lettre)+1)*sizeof(char));
+		res=realloc(res,(strlen(res)+strlen(lettre)+1)*sizeof(char));
 		strcat(res,lettre);
 		free(lettre);
 	}
 	return res;
+}
+
+
+void ecrire_fichier_code(char* code, char* chaine, char* nom_fichier){
+	
+	if(code!=NULL&&chaine!=NULL){
+		FILE* fichier = fopen(nom_fichier,"w");
+		if(fichier!=NULL){
+		
+			int taille=0;
+			p_comb* comb=generer_combinaison(chaine,&taille);
+			fprintf(fichier,"%lu\n%d\n%s\n",strlen(code),taille,code);
+			for(int i=0; i<taille; i++){
+				char* lettre = get_lettre(comb[i]);
+				fprintf(fichier,"[%s,%d]\n",lettre,get_occ(comb[i]));
+				supprimer_combinaison(&comb[i]);
+				free(lettre);
+			}
+			free(comb);
+		}
+		fclose(fichier);
+	}else{
+		printf("Erreur à la création ou écriture du fichier.");
+	}
 }

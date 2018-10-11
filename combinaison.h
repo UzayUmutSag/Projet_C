@@ -26,5 +26,7 @@ p_comb copier_combinaison(p_comb);
 
 char* get_lettre(p_comb comb);
 
+int get_occ(p_comb comb);
+
 
 #endif

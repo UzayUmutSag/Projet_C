@@ -14,7 +14,7 @@ int main (void) {
 	}
 	free(tab_comb);
 	tab_comb=NULL;*/
-	char * chaine="uzay umut sag/ozgur deniz sag/yagiz meric sag";
+	char * chaine="uzay, umut sag/ozgur deniz sag/yagiz meric sag";
 
 	
 	p_arbre test_arbre = generer_arbre(chaine);
@@ -28,14 +28,17 @@ int main (void) {
 
 	/*char* s = codeprefixe (test_arbre,"c");
 	printf("%s\n", s);*/
-	free(s);
+	
 
 	
 
 	char * code = "0000010101111110000011100000110001001011010011110011110110010110001111010011010111011111010101000110010110100111100111111010011101000110011100110111111010101101001001011010011";
-	char* chainebis = decoder(test_arbre,code);
+	char* chainebis = decoder(test_arbre,s);
 	printf("%s\n",chainebis);
+	ecrire_fichier_code(s,chaine,"test.txt");
 	free(chainebis);
+	free(s);
+
 
 	detruire_tout(&test_arbre);
 
