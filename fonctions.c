@@ -69,10 +69,11 @@ p_comb* generer_combinaison(char* chaine,int * taille){
 	    		t=realloc(t,taille_t*sizeof(char)+1);
 	    		tab=realloc(tab,taille_t*sizeof(int));
 	    		t[taille_t-1]=chaine[c];
+	    		t[taille_t]='\0';
 	    		tab[taille_t-1]=1;
 	    	}
 	    }
-	    t[taille_t]='\0';
+	    
 	    p_comb* tab_comb = (p_comb*) malloc((taille_t)*sizeof(struct combinaison));
 	    for(int i = 0 ; i<taille_t ; i++){
 	    	char s[2]={t[i],'\0'};
@@ -113,3 +114,24 @@ p_arbre generer_arbre(char* s){
 	detruire_liste(&l);
 	return a;
 }
+
+char * encoder(p_arbre a,char * c){
+	int taille=strlen(c);
+	int taille_code=0;
+	int taille_res=0;
+	char * res=(char*)malloc(sizeof(char));
+	res[0]='\0';
+	char s[2]={' ','\0'};
+	char * code="";
+	for (int i = 0; i < taille; ++i){
+		s[0]=c[i];
+		code=codeprefixe(a,s);
+		taille_code=strlen(code);
+		taille_res=strlen(res);
+		res=realloc(res,(taille_code+taille_res+1)*sizeof(char));
+		strcat(res,code);
+		free(code);
+	}
+	return res;
+}
+
