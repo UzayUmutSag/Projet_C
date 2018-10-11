@@ -78,7 +78,10 @@ int main (void) {
 	p_arbre test_arbre = generer_arbre("uzay umut sag/ozgur deniz sag/yagiz meric sag");
 
 	afficher_arbre(test_arbre);
-	
+	char * code = "0000010101111110000011100000110001001011010011110011110110010110001111010011010111011111010101000110010110100111100111111010011101000110011100110111111010101101001001011010011";
+	char* chaine = decoder(test_arbre,code);
+	printf("%s\n",chaine);
+	free(chaine);
 	detruire_tout(&test_arbre);
 
 	return 0;

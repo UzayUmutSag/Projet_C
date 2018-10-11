@@ -113,3 +113,17 @@ p_arbre generer_arbre(char* s){
 	detruire_liste(&l);
 	return a;
 }
+
+char* decoder(p_arbre a, char* code){
+	int pos = 0;
+	char* res=(char*)malloc(sizeof(char));
+	res[0]= '\0';
+	while(pos<(int)strlen(code)){
+		p_comb comb = parcourir_arbre(a,code+pos,&pos);
+		char* lettre = get_lettre(comb);
+		res=realloc(res,  (strlen(res)+strlen(lettre)+1)*sizeof(char));
+		strcat(res,lettre);
+		free(lettre);
+	}
+	return res;
+}

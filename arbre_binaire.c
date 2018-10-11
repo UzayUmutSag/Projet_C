@@ -106,3 +106,9 @@ int comparer_arbre_liste(void * a,void * b){
 }
 
 
+void * parcourir_arbre(p_arbre a, char* code,int* i){
+	if(a!=NULL && code !=NULL){
+		return parcourir_noeud(a->racine,code,i);
+	}
+	return NULL;
+}
